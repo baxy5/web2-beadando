@@ -1,13 +1,22 @@
 <?php
 
+require_once __DIR__ . '/loadEnv.php';
+
 class Database {
-    private $host = 'localhost';  
-    private $db_name = 'web2';  
-    private $username = 'web2'; 
-    private $password = 'H_f[@Kh8(Rm6_mUr';      
+    private $host;
+    private $db_name; 
+    private $username;
+    private $password;  
     private $conn;
 
     public function connect() {
+        loadEnv(__DIR__ . '/../.env');
+
+        $this->host = 'localhost';  
+        $this->db_name = $_ENV['DB_NAME'];  
+        $this->username = $_ENV['DB_USERNAME']; 
+        $this->password = $_ENV['DB_PASS'];      
+
         $this->conn = null;
 
         try {
